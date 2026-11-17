@@ -33,6 +33,14 @@ class ActionPayload(BaseModel):
 
     action: str
     remark: str | None = None
+    expected_version: int | None = None  # 并发控制：提交方读取的检查点主版本，不一致则本次结果不落库
+
+
+class ValidatePayload(BaseModel):
+    """快照校验接口载荷：消费分片复用清单时核对主版本边界。"""
+
+    version: int
+    remark: str | None = None
 
 
 
